@@ -26,7 +26,14 @@ public class BinaryTreeAlmostComplete {
 	
 	
 	public BinaryTreeAlmostComplete(int[] values) {
-		// TODO
+		if(values.length != 0) {
+			rootValue = values[0];
+			if(values.length > 1) {
+				for(int i = 1 ; i < values.length ; i++) {
+					this.addValue(values[i]);
+				}
+			}
+		}
 	}
 	
 	
@@ -108,8 +115,15 @@ public class BinaryTreeAlmostComplete {
 	
 	
 	public String toString(String offset) {
-		// TODO
-		return offset;
+		String res = offset;
+		res += rootValue + " (" + nbDescendants + " descendants)\n";
+		if(Objects.nonNull(left)) {
+			res+= left.toString("  " + offset);
+		}
+		if(Objects.nonNull(right)) {
+			res+= right.toString("  " + offset);
+		}
+		return res;
 	}
 	
 	
@@ -132,7 +146,13 @@ public class BinaryTreeAlmostComplete {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// TODO
+		BinaryTreeAlmostComplete root = new BinaryTreeAlmostComplete(5);
+
+		int[] treeValues = {109, 107, 111, 112, 103, 104, 110, 101, 106, 102, 108, 105};
+		BinaryTreeAlmostComplete heap2 = new BinaryTreeAlmostComplete(treeValues);
+
+		System.out.println(root);
+		System.out.println(heap2);
 	}
 
 }
