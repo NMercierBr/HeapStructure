@@ -91,8 +91,25 @@ public class BinaryTreeAlmostComplete {
 	
 	
 	protected BinaryTreeAlmostComplete getRightmostLowestNode() {
-		// TODO
-		return new BinaryTreeAlmostComplete(0);
+			if(Objects.isNull(this.left)){
+				return this;
+			} else {
+				int leftDesc = this.left.nbDescendants;
+				if(getLevels(leftDesc) == getLevels(leftDesc+1)) {
+					return this.left.getRightmostLowestNode();
+				} else {
+					if(Objects.nonNull(this.right)) {
+						int rightDesc = this.right.nbDescendants;
+						if(getLevels(leftDesc) > getLevels(rightDesc)) {
+							return this.left.getRightmostLowestNode();
+						} else {
+						return this.right.getRightmostLowestNode();
+						}
+					} else {
+						return this.left.getRightmostLowestNode();
+					}
+				}
+			}
 	}
 	
 	
@@ -118,10 +135,10 @@ public class BinaryTreeAlmostComplete {
 		String res = offset;
 		res += rootValue + " (" + nbDescendants + " descendants)\n";
 		if(Objects.nonNull(left)) {
-			res+= left.toString("  " + offset);
+			res+= left.toString("  |" + offset);
 		}
 		if(Objects.nonNull(right)) {
-			res+= right.toString("  " + offset);
+			res+= right.toString("  |" + offset);
 		}
 		return res;
 	}
@@ -146,13 +163,15 @@ public class BinaryTreeAlmostComplete {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		BinaryTreeAlmostComplete root = new BinaryTreeAlmostComplete(5);
-
-		int[] treeValues = {109, 107, 111, 112, 103, 104, 110, 101, 106, 102, 108, 105};
+		int[] arbr = { 1 , 2 ,3, 4};
+		
+		BinaryTreeAlmostComplete root = new BinaryTreeAlmostComplete(arbr);
+		int[] treeValues = {109, 107, 111, 112, 103, 104, 110, 101, 106, 102, 108, 105, 160 , 170 , 175};
 		BinaryTreeAlmostComplete heap2 = new BinaryTreeAlmostComplete(treeValues);
-
 		System.out.println(root);
+		System.out.println(root.getRightmostLowestNode());
 		System.out.println(heap2);
+		System.out.println(heap2.getRightmostLowestNode());
 	}
 
 }
