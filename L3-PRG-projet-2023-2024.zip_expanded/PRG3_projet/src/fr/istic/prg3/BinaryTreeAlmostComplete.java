@@ -113,15 +113,18 @@ public class BinaryTreeAlmostComplete {
 	}
 	
 	
-	
-	
-	public void siftDown() {
-		// TODO
+	public void siftDown(BinaryTreeAlmostComplete node) {
+		
 	}
 	
-	
 	public void siftUp() {
-		// TODO
+		BinaryTreeAlmostComplete node = this.getRightmostLowestNode();
+		while(Objects.nonNull(node.up) && node.up.rootValue < node.rootValue) {
+			int tmp = node.rootValue;
+			node.rootValue = node.up.rootValue;
+			node.up.rootValue = tmp;
+			node = node.up;
+		}
 	}
 	
 	
@@ -165,13 +168,16 @@ public class BinaryTreeAlmostComplete {
 	public static void main(String[] args) {
 		int[] arbr = { 1 , 2 ,3, 4};
 		
-		BinaryTreeAlmostComplete root = new BinaryTreeAlmostComplete(arbr);
-		int[] treeValues = {109, 107, 111, 112, 103, 104, 110, 101, 106, 102, 108, 105, 160 , 170 , 175};
+		BinaryTreeAlmostComplete tree1 = new BinaryTreeAlmostComplete(arbr);
+		int[] treeValues = {109, 107, 111, 112, 103, 104, 110, 101, 106, 102, 108, 105};
 		BinaryTreeAlmostComplete heap2 = new BinaryTreeAlmostComplete(treeValues);
-		System.out.println(root);
-		System.out.println(root.getRightmostLowestNode());
+
+		System.out.println(tree1.getRightmostLowestNode());
 		System.out.println(heap2);
 		System.out.println(heap2.getRightmostLowestNode());
+		System.out.println();
+		heap2.siftUp();
+		System.out.println(heap2);
 	}
 
 }
