@@ -44,11 +44,7 @@ public class BinaryTreeAlmostComplete {
 		this.up = parent;
 		this.updateNumberOfDescendants();
 	}
-	
-	
-	
-	
-	
+		
 	
 	public void addValue(int value) {
 		if (Objects.isNull(this.left)) {
@@ -113,8 +109,38 @@ public class BinaryTreeAlmostComplete {
 	}
 	
 	
-	public void siftDown(BinaryTreeAlmostComplete node) {
-		
+	public void siftDown() {
+		BinaryTreeAlmostComplete node = this;
+		int currentval = node.rootValue;
+		if(Objects.isNull(node.left)) {	//sous arbre gauche vide, current est une feuille
+			return;
+		} else {
+			int leftVal = node.left.rootValue;
+			if(Objects.nonNull(node.right)) { // current a deux fils
+				boolean leftSupRight = (node.left.rootValue > node.right.rootValue);
+				
+				if(currentval < leftVal && leftSupRight) {//echange de current a left
+					int tmp = currentval;
+					currentval = leftVal;
+					leftVal = tmp;
+					node.left.siftDown();
+				} else if(currentval < node.right.rootValue) {	//echange de current a right
+					int tmp = node.rootValue;
+					node.rootValue = node.right.rootValue;
+					node.right.rootValue = tmp;
+					node.right.siftDown();
+				}
+			} else {
+				if(currentval < leftVal) {	//echange de current a left
+					int tmp = node.rootValue;
+					node.rootValue = leftVal;
+					leftVal = tmp;
+					node.left.siftDown();
+				} else {
+					return;
+				}
+			}
+		}
 	}
 	
 	public void siftUp() {
@@ -171,13 +197,16 @@ public class BinaryTreeAlmostComplete {
 		BinaryTreeAlmostComplete tree1 = new BinaryTreeAlmostComplete(arbr);
 		int[] treeValues = {109, 107, 111, 112, 103, 104, 110, 101, 106, 102, 108, 105};
 		BinaryTreeAlmostComplete heap2 = new BinaryTreeAlmostComplete(treeValues);
-
 		System.out.println(tree1.getRightmostLowestNode());
 		System.out.println(heap2);
 		System.out.println(heap2.getRightmostLowestNode());
 		System.out.println();
-		heap2.siftUp();
+		//heap2.siftUp();
+		
+		//System.out.println(heap2);
+		heap2.siftDown();
 		System.out.println(heap2);
+		
 	}
 
 }
