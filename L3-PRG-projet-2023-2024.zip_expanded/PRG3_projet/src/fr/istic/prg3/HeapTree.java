@@ -86,13 +86,31 @@ public class HeapTree extends BinaryTreeAlmostComplete implements Heap {
 	}
 	
 	
-	public static int[] heapsort(int[] unsortedValues) {
-		// TODO
+	public static int[] heapsort(int[] unsortedValues) {	//tri par insertion
+		for(int i = 0 ; i < unsortedValues.length ; i++) {
+			int tmp = unsortedValues[i];
+			int j = i ;
+			while( j > 0 && unsortedValues[j-1] > tmp) {
+				unsortedValues[j] = unsortedValues[j-1];
+				j--;
+			}
+			unsortedValues[j] = tmp;
+		}	
+		return unsortedValues;
 	}
 	
-	
-	
-	
+	public static void listToString(int[] tab) {
+		System.out.print("{");
+		for(int i = 0 ; i < tab.length ; i++) {
+			
+			if(i == tab.length-1) {
+				System.out.print(tab[i] + "}");
+			} else {
+				System.out.print(tab[i] + ", ");
+			}
+		}
+		System.out.println();
+	}
 	
 
 	/**
@@ -107,6 +125,9 @@ public class HeapTree extends BinaryTreeAlmostComplete implements Heap {
 		//System.out.println(myTree.getMax());
 		System.out.println(myTree.extractMax());
 		System.out.println(myTree);
+		int[] heapToSort = { 3 , 2 , 7 , 1 , 9 , 8 };
+		listToString(treeValues);
+		listToString(heapsort(heapToSort));
 		
 	}
 

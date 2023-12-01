@@ -1,33 +1,37 @@
 package fr.istic.prg3;
 
+import java.util.ArrayList;
+
 /**
  * @version 1.0
  *
  */
-public class HeapArray implements Heap {
+public class HeapArray extends ArrayList<Integer> implements Heap {
 	
-	protected int[] values;
+	protected ArrayList<Integer> values;
 	protected int size;
 	
-	public HeapArray(int[] valuesArray) {
-		// TODO
+	public HeapArray(ArrayList<Integer> valuesArray) {
+		valuesArray.sort(null);
+		this.values = valuesArray;
+		this.size = valuesArray.size();
 	}
 	
 	
 	public void addValue(int newValue) {
-		// TODO
+		this.values.add(newValue);
+		this.values.sort(null);
 	}
 	
 	
 	public int getMax() {
-		// TODO
-		return 0;
+		return this.values.get(size-1);
 	}
 	
 	
 	public int extractMax() {
-		// TODO
-		return 0;
+		this.values.remove(size-1);
+		return this.values.get(size-2);
 	}
 	
 	
@@ -45,20 +49,17 @@ public class HeapArray implements Heap {
 	
 	
 	protected int indexLeft(int position) {
-		// TODO
-		return 0;
+		return (2*position)+1;
 	}
 	
 	
 	protected int indexRight(int position) {
-		// TODO
-		return 0;
+		return (2*position)+2;
 	}
 	
 	
 	protected int indexUp(int position) {
-		// TODO
-		return 0;
+		return (position-1)/2;
 	}
 	
 	
@@ -83,7 +84,9 @@ public class HeapArray implements Heap {
 	
 	
 	protected void swap(int index1, int index2) {
-		// TODO
+		Integer tmp = index1;
+		index1 = index2;
+		index2 = tmp;
 	}
 	
 	
@@ -113,7 +116,17 @@ public class HeapArray implements Heap {
 	
 
 	public static void main(String[] args) {
-		// TODO
+		ArrayList<Integer> list1 = new ArrayList();
+		list1.add(3);
+		list1.add(6);
+		list1.add(1);
+		list1.add(89);
+		list1.add(12);
+		System.out.println(list1);
+		HeapArray heap1 = new HeapArray(list1);
+		System.out.println(heap1.values);
+		System.out.println(heap1.getMax());
+		System.out.println(heap1.extractMax());
 	
 }
 }

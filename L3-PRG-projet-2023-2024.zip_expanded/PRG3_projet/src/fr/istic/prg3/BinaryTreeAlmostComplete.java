@@ -29,7 +29,7 @@ public class BinaryTreeAlmostComplete {
 		if(values.length != 0) {
 			rootValue = values[0];
 			if(values.length > 1) {
-				for(int i = 1 ; i < values.length ; i++) {
+				for(int i = 1 ; i < values.length ; i++) {	//on utilise addValue pour créer l'arbre
 					this.addValue(values[i]);
 				}
 			}
@@ -87,11 +87,11 @@ public class BinaryTreeAlmostComplete {
 	
 	
 	protected BinaryTreeAlmostComplete getRightmostLowestNode() {
-			if(Objects.isNull(this.left)){
+			if(Objects.isNull(this.left)){	//si l'arbre n'a pas de fils gauche, c'est une feuille que l'on renvoi donc
 				return this;
 			} else {
 				int leftDesc = this.left.nbDescendants;
-				if(getLevels(leftDesc) == getLevels(leftDesc+1)) {
+				if(getLevels(leftDesc) == getLevels(leftDesc+1)) {	//on regarde si le sous-arbre gauche est complet
 					return this.left.getRightmostLowestNode();
 				} else {
 					if(Objects.nonNull(this.right)) {
@@ -145,7 +145,7 @@ public class BinaryTreeAlmostComplete {
 	
 	public void siftUp() {
 		BinaryTreeAlmostComplete node = this.getRightmostLowestNode();
-		while(Objects.nonNull(node.up) && node.up.rootValue < node.rootValue) {
+		while(Objects.nonNull(node.up) && node.up.rootValue < node.rootValue) {	//permutation successive de la valeur
 			int tmp = node.rootValue;
 			node.rootValue = node.up.rootValue;
 			node.up.rootValue = tmp;
@@ -201,10 +201,11 @@ public class BinaryTreeAlmostComplete {
 		System.out.println(heap2);
 		System.out.println(heap2.getRightmostLowestNode());
 		System.out.println();
-		//heap2.siftUp();
+		heap2.siftUp();
 		
-		//System.out.println(heap2);
+		System.out.println(heap2);
 		heap2.siftDown();
+		
 		System.out.println(heap2);
 		
 	}
