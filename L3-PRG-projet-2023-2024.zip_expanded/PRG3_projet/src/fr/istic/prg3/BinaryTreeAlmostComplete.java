@@ -25,6 +25,11 @@ public class BinaryTreeAlmostComplete {
 	}
 	
 	
+	public int getRootValue() {
+		return rootValue;
+	}
+
+
 	public BinaryTreeAlmostComplete(int[] values) {
 		if(values.length != 0) {
 			rootValue = values[0];
@@ -86,7 +91,7 @@ public class BinaryTreeAlmostComplete {
 	}
 	
 	
-	protected BinaryTreeAlmostComplete getRightmostLowestNode() {
+	public BinaryTreeAlmostComplete getRightmostLowestNode() {
 			if(Objects.isNull(this.left)){	//si l'arbre n'a pas de fils gauche, c'est une feuille que l'on renvoi donc
 				return this;
 			} else {

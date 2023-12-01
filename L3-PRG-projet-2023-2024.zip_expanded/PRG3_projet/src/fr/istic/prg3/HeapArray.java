@@ -1,6 +1,7 @@
 package fr.istic.prg3;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * @version 1.0
@@ -21,6 +22,7 @@ public class HeapArray extends ArrayList<Integer> implements Heap {
 	public void addValue(int newValue) {
 		this.values.add(newValue);
 		this.values.sort(null);
+		this.size++;
 	}
 	
 	
@@ -30,7 +32,8 @@ public class HeapArray extends ArrayList<Integer> implements Heap {
 	
 	
 	public int extractMax() {
-		this.values.remove(size-1);
+		this.values.remove(size-1);	//val max = dernier val du tableau car tri croissant
+		this.size--;
 		return this.values.get(size-2);
 	}
 	
@@ -40,12 +43,11 @@ public class HeapArray extends ArrayList<Integer> implements Heap {
 	}
 	
 	
-	public static int[] heapsort(int[] unsortedValues) {
-		// TODO
-		int[]tab = {};
-		return tab;
+	public static ArrayList<Integer> heapsort(ArrayList<Integer> unsortedValues) {
+		ArrayList<Integer> newList = new ArrayList<Integer>(unsortedValues);
+		newList.sort(null);
+		return newList;
 	}
-	
 	
 	
 	protected int indexLeft(int position) {
@@ -69,7 +71,7 @@ public class HeapArray extends ArrayList<Integer> implements Heap {
 	
 	
 	protected void siftDown(int position) {
-		// TODO
+		
 	}
 	
 	
@@ -79,14 +81,24 @@ public class HeapArray extends ArrayList<Integer> implements Heap {
 	
 	
 	protected void siftUp(int position) {
-		// TODO
+		if(position >= 0 && position < this.size) {	//on verifie que position est dans une intervalle correcte
+		int parent = indexUp(position);
+		while(this.values.get(position) > parent) {	//tant que le fils a une val sup de son parent
+			int tmp = this.values.get(position);
+			this.values.set(position, this.values.get(parent));
+			this.values.set(parent, tmp);		//on échange les valeurs entre fils et parents
+			parent = indexUp(position);			// et on reaffecte le parent pour permutation successive doudou je t'aime
+		}
+		}
 	}
 	
 	
 	protected void swap(int index1, int index2) {
-		Integer tmp = index1;
-		index1 = index2;
-		index2 = tmp;
+		if(index1 >= 0 && index1 < this.size && index2 >= 0 && index2 < this.size ) { // on verifie que lintervalle est correcte
+			Integer tmp = this.values.get(index1);
+			this.values.set(index1, this.values.get(index2));
+			this.values.set(index2,tmp); 
+		}
 	}
 	
 	
@@ -101,18 +113,13 @@ public class HeapArray extends ArrayList<Integer> implements Heap {
 	
 	
 	public String toString() {
-		// TODO
-		return "";
+		return this.toString("");
 	}
 	
 	
 	public String toString(String offset) {
-		// TODO
-		return offset;
+		return "";
 	}
-	
-	
-	
 	
 
 	public static void main(String[] args) {
@@ -127,6 +134,9 @@ public class HeapArray extends ArrayList<Integer> implements Heap {
 		System.out.println(heap1.values);
 		System.out.println(heap1.getMax());
 		System.out.println(heap1.extractMax());
-	
+
+		heap1.swap(0, 3);
+		System.out.println(heap1.values);
+		heap1.siftUp();
 }
 }
