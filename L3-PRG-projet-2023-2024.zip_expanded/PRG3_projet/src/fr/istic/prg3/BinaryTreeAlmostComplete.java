@@ -202,13 +202,14 @@ public class BinaryTreeAlmostComplete {
 		BinaryTreeAlmostComplete tree1 = new BinaryTreeAlmostComplete(arbr);
 		int[] treeValues = {109, 107, 111, 112, 103, 104, 110, 101, 106, 102, 108, 105};
 		BinaryTreeAlmostComplete heap2 = new BinaryTreeAlmostComplete(treeValues);
-		System.out.println(tree1.getRightmostLowestNode());
+		//System.out.println(tree1.getRightmostLowestNode());
 		System.out.println(heap2);
 		System.out.println(heap2.getRightmostLowestNode());
 		System.out.println();
-		heap2.siftUp();
+		//heap2.siftUp();
 		
 		System.out.println(heap2);
+		System.out.println(heap2.getRightmostLowestNode());
 		heap2.siftDown();
 		
 		System.out.println(heap2);
